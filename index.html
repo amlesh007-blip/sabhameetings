@@ -1,0 +1,4291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sabhā - Premium Indian Video Meetings</title>
+
+<script src="https://8x8.vc/vpaas-magic-cookie-df8532c5bfbd47ecb229c40f03ba8ed2/external_api.js"></script>
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@500;700&family=Great+Vibes&display=swap"
+      rel="stylesheet">
+
+<style>
+:root {
+  --gold-primary: #E2B755;
+  --gold-light: #FFF0BD;
+  --gold-dark: #9A741C;
+  --gold-gradient: linear-gradient(
+    135deg,
+    #BF953F 0%,
+    #FCF6BA 25%,
+    #B38728 50%,
+    #FBF5B7 75%,
+    #AA771C 100%
+  );
+
+  --maroon-deep: #3A0208;
+  --maroon-dark: #1F0004;
+  --bg-dark: #0A0203;
+  --panel-bg: rgba(22, 6, 8, 0.95);
+  --border-gold: 1px solid rgba(226, 183, 85, 0.4);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Cinzel', 'Georgia', serif;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  background: var(--bg-dark);
+  color: white;
+  overflow: hidden;
+}
+
+/* CORNER MOTIFS */
+
+.corner-svg {
+  position: absolute;
+  width: 130px;
+  height: 130px;
+  pointer-events: none;
+  z-index: 3000;
+  filter: drop-shadow(0 0 6px rgba(226,183,85,.5));
+}
+
+.corner-top-left {
+  top: 0;
+  left: 0;
+}
+
+.corner-top-right {
+  top: 0;
+  right: 0;
+  transform: scaleX(-1);
+}
+
+.corner-bottom-left {
+  bottom: 0;
+  left: 0;
+  transform: scaleY(-1);
+}
+
+.corner-bottom-right {
+  bottom: 0;
+  right: 0;
+  transform: scale(-1,-1);
+}
+
+/* LOGIN */
+
+#login-page {
+  position: fixed;
+  inset: 0;
+
+  background:
+    radial-gradient(
+      circle at center,
+      #52050E 0%,
+      var(--maroon-dark) 60%,
+      var(--bg-dark) 100%
+    );
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 2000;
+}
+
+.login-card {
+  width: 480px;
+  padding: 35px;
+
+  background: rgba(18,4,6,.94);
+
+  border: 2px solid var(--gold-primary);
+
+  box-shadow:
+    0 0 45px rgba(0,0,0,.9),
+    inset 0 0 20px rgba(226,183,85,.15);
+
+  border-radius: 4px;
+  text-align: center;
+  position: relative;
+}
+
+.login-card h1 {
+  font-family: 'Cinzel Decorative', serif;
+
+  background: var(--gold-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  font-size: 2.5rem;
+  letter-spacing: 3px;
+}
+
+.login-card p.subtitle {
+  color: var(--gold-light);
+  font-family: 'Great Vibes', cursive;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.divider-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+  margin-bottom: 20px;
+
+  color: var(--gold-primary);
+}
+
+.divider-line::before,
+.divider-line::after {
+  content: '';
+
+  height: 1px;
+  width: 80px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      var(--gold-primary),
+      transparent
+    );
+}
+
+.input-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.input-group label {
+  display: block;
+
+  color: var(--gold-light);
+
+  font-size: .75rem;
+  margin-bottom: 5px;
+
+  letter-spacing: 1.5px;
+  font-weight: bold;
+}
+
+.input-group input {
+  width: 100%;
+
+  padding: 10px 14px;
+
+  background: rgba(0,0,0,.6);
+
+  border: 1px solid rgba(226,183,85,.4);
+
+  color: white;
+
+  border-radius: 3px;
+
+  outline: none;
+
+  font-size: .9rem;
+}
+
+.input-group input:focus {
+  border-color: var(--gold-primary);
+
+  box-shadow:
+    0 0 10px rgba(226,183,85,.4);
+}
+
+.remember-container {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 20px;
+
+  font-size: .8rem;
+  color: var(--gold-light);
+}
+
+.remember-container input[type="checkbox"] {
+  accent-color: var(--gold-primary);
+  margin-right: 8px;
+}
+
+.btn-gold {
+  width: 100%;
+
+  padding: 12px;
+
+  background: var(--gold-gradient);
+
+  border: 1px solid var(--gold-light);
+
+  color: var(--maroon-dark);
+
+  font-weight: bold;
+
+  font-size: 1rem;
+
+  letter-spacing: 2px;
+
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  border-radius: 3px;
+
+  transition: .3s;
+}
+
+.btn-gold:hover {
+  filter: brightness(1.15);
+
+  box-shadow:
+    0 0 18px rgba(226,183,85,.6);
+}
+
+/* APP */
+
+#app-container {
+  display: none;
+
+  height: 100%;
+  width: 100%;
+
+  grid-template-columns: 1fr auto;
+  grid-template-rows: 60px 1fr;
+
+  transition:
+    grid-template-columns .3s ease;
+}
+
+#app-container.sidebar-hidden {
+  grid-template-columns: 1fr 0;
+}
+
+header {
+  grid-column: 1/-1;
+
+  background: var(--maroon-dark);
+
+  border-bottom: 2px solid var(--gold-primary);
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 25px;
+
+  z-index: 10;
+}
+
+.header-left {
+  display: flex;
+
+  align-items: center;
+
+  gap: 20px;
+}
+
+.header-title {
+  font-family: 'Cinzel Decorative', serif;
+
+  background: var(--gold-gradient);
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.room-badge {
+  background: rgba(226,183,85,.15);
+
+  border: var(--border-gold);
+
+  padding: 4px 10px;
+
+  border-radius: 4px;
+
+  font-size: .8rem;
+
+  color: var(--gold-light);
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+}
+
+.header-controls {
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+}
+
+.icon-btn {
+  background: rgba(226,183,85,.1);
+
+  border: var(--border-gold);
+
+  color: var(--gold-primary);
+
+  padding: 8px 12px;
+
+  cursor: pointer;
+
+  font-size: .9rem;
+
+  border-radius: 3px;
+
+  transition: .3s;
+}
+
+.icon-btn:hover {
+  background: var(--gold-primary);
+  color: var(--maroon-dark);
+}
+
+#jaas-container {
+  height: 100%;
+  width: 100%;
+  background: #000;
+}
+
+/* SIDEBAR */
+
+.sidebar {
+  width: 560px;
+
+  background: var(--panel-bg);
+
+  border-left: 2px solid var(--gold-primary);
+
+  display: flex;
+
+  flex-direction: column;
+
+  overflow: hidden;
+
+  transition: width .3s ease;
+}
+
+#app-container.sidebar-hidden .sidebar {
+  width: 0;
+  border-left: none;
+}
+
+.panel-tabs {
+  display: flex;
+
+  border-bottom: var(--border-gold);
+
+  background: rgba(0,0,0,.4);
+}
+
+.tab-btn {
+  flex: 1;
+
+  padding: 10px 2px;
+
+  background: transparent;
+
+  border: none;
+
+  color: #999;
+
+  cursor: pointer;
+
+  font-size: .7rem;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 4px;
+
+  transition: .3s;
+
+  min-width: 82px;
+}
+
+.tab-btn i {
+  font-size: .9rem;
+}
+
+.tab-btn.active,
+.tab-btn:hover {
+  color: var(--gold-primary);
+
+  background:
+    rgba(226,183,85,.1);
+}
+
+.panel-content {
+  flex: 1;
+
+  padding: 15px;
+
+  overflow-y: auto;
+
+  display: none;
+}
+
+.panel-content.active {
+  display: flex;
+
+  flex-direction: column;
+}
+
+.panel-title {
+  color: var(--gold-primary);
+
+  font-size: .95rem;
+
+  margin-bottom: 12px;
+
+  padding-bottom: 6px;
+
+  border-bottom: 1px dashed var(--gold-dark);
+
+  letter-spacing: 1px;
+}
+
+/* AI */
+
+.ai-box {
+  flex: 1;
+
+  overflow-y: auto;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+
+  margin-bottom: 12px;
+
+  padding-right: 5px;
+}
+
+.msg {
+  padding: 8px 12px;
+
+  border-radius: 4px;
+
+  font-size: .85rem;
+
+  line-height: 1.4;
+}
+
+.msg.user {
+  background: rgba(226,183,85,.15);
+
+  border:
+    1px solid rgba(226,183,85,.3);
+
+  align-self: flex-end;
+
+  color: var(--gold-light);
+}
+
+.msg.system {
+  background:
+    rgba(255,255,255,.05);
+
+  border-left:
+    2px solid var(--gold-primary);
+
+  align-self: flex-start;
+}
+
+.input-row {
+  display: flex;
+
+  gap: 8px;
+}
+
+.input-row input,
+.input-row select {
+  padding: 8px;
+
+  background: rgba(0,0,0,.6);
+
+  border: var(--border-gold);
+
+  color: white;
+
+  border-radius: 3px;
+
+  outline: none;
+}
+
+.input-row button {
+  padding: 8px 14px;
+
+  background: var(--gold-gradient);
+
+  border: none;
+
+  color: var(--maroon-dark);
+
+  cursor: pointer;
+
+  font-weight: bold;
+
+  border-radius: 3px;
+}
+
+/* CAPTIONS */
+
+#caption-box {
+  flex: 1;
+
+  min-height: 220px;
+
+  max-height: 300px;
+
+  overflow-y: auto;
+
+  background: rgba(0,0,0,.7);
+
+  border: var(--border-gold);
+
+  border-radius: 4px;
+
+  padding: 12px;
+
+  font-size: .85rem;
+
+  line-height: 1.5;
+
+  margin-bottom: 10px;
+}
+
+.caption-line {
+  margin-bottom: 8px;
+}
+
+.speaker-tag {
+  font-weight: bold;
+  margin-right: 6px;
+}
+
+.spk-1 {
+  color: #38bdf8;
+}
+
+.spk-2 {
+  color: #4ade80;
+}
+
+.interim-text {
+  color: #888;
+  font-style: italic;
+}
+
+.speaker-config-box {
+  background: rgba(0,0,0,.4);
+
+  border: var(--border-gold);
+
+  padding: 10px;
+
+  border-radius: 4px;
+
+  margin-bottom: 10px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 8px;
+}
+
+.speaker-config-box div {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 10px;
+
+  font-size: .75rem;
+}
+
+.speaker-config-box input {
+  width: 140px;
+
+  padding: 4px 8px;
+
+  background: #000;
+
+  border:
+    1px solid var(--gold-dark);
+
+  color: white;
+
+  border-radius: 3px;
+
+  font-size: .75rem;
+}
+
+.caption-actions {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 6px;
+
+  margin-bottom: 10px;
+}
+
+.caption-actions button {
+  flex: 1;
+
+  padding: 6px 10px;
+
+  font-size: .75rem;
+
+  border-radius: 3px;
+}
+
+/* WHITEBOARD */
+
+.wb-controls {
+  display: flex;
+
+  gap: 8px;
+
+  margin-bottom: 10px;
+
+  align-items: center;
+
+  flex-wrap: wrap;
+}
+
+.wb-controls input[type=color] {
+  border: none;
+
+  width: 30px;
+  height: 30px;
+
+  background: transparent;
+
+  cursor: pointer;
+}
+
+.wb-controls select,
+.wb-controls input[type=number] {
+  background: rgba(0,0,0,.65);
+
+  border: var(--border-gold);
+
+  color: white;
+
+  border-radius: 3px;
+
+  padding: 6px 7px;
+
+  min-height: 30px;
+}
+
+.wb-controls label {
+  font-size: .68rem;
+
+  color: var(--gold-light);
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 4px;
+}
+
+.wb-tool-btn.active {
+  background: var(--gold-primary);
+
+  color: var(--maroon-dark);
+}
+
+canvas.whiteboard {
+  width: 100%;
+
+  height: 320px;
+
+  background: #1a1a1a;
+
+  border: var(--border-gold);
+
+  border-radius: 4px;
+
+  cursor: crosshair;
+
+  touch-action: none;
+}
+
+/* NOTES */
+
+textarea.notes-area {
+  width: 100%;
+  height: 100%;
+
+  background: rgba(0,0,0,.5);
+
+  border: var(--border-gold);
+
+  color: var(--gold-light);
+
+  padding: 12px;
+
+  resize: none;
+
+  border-radius: 3px;
+
+  outline: none;
+
+  line-height: 1.5;
+}
+
+/* CALCULATOR */
+
+.calculator {
+  width: 100%;
+
+  background: rgba(0,0,0,.45);
+
+  border: var(--border-gold);
+
+  border-radius: 5px;
+
+  padding: 12px;
+}
+
+.calc-display {
+  width: 100%;
+
+  height: 52px;
+
+  margin-bottom: 10px;
+
+  background: #050505;
+
+  border: var(--border-gold);
+
+  color: var(--gold-light);
+
+  border-radius: 4px;
+
+  padding: 8px 10px;
+
+  text-align: right;
+
+  font-size: 1.25rem;
+
+  outline: none;
+}
+
+.calc-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4,1fr);
+
+  gap: 7px;
+}
+
+.calc-grid button {
+  min-height: 42px;
+
+  border: var(--border-gold);
+
+  border-radius: 4px;
+
+  background: rgba(226,183,85,.09);
+
+  color: white;
+
+  cursor: pointer;
+
+  font-weight: bold;
+}
+
+.calc-grid button:hover {
+  background:
+    rgba(226,183,85,.25);
+}
+
+.calc-grid .calc-equals {
+  background: var(--gold-gradient);
+
+  color: var(--maroon-dark);
+}
+
+#calculator-ui.calculator-disabled {
+  opacity: .45;
+
+  pointer-events: none;
+
+  user-select: none;
+}
+
+.ai-generated-image {
+  width: 100%;
+
+  border-radius: 5px;
+
+  border: var(--border-gold);
+
+  display: block;
+
+  margin-top: 6px;
+}
+
+/* MOBILE */
+
+@media(max-width:900px) {
+
+  .sidebar {
+    width: min(92vw,560px);
+  }
+
+  .header-title {
+    font-size: 1.1rem;
+  }
+
+  .room-badge {
+    display: none;
+  }
+
+  .header-controls {
+    gap: 5px;
+  }
+
+  .icon-btn {
+    padding: 7px 8px;
+    font-size: .7rem;
+  }
+
+}
+
+@media(max-width:600px) {
+
+  .login-card {
+    width: 92%;
+  }
+
+  .header-left {
+    gap: 5px;
+  }
+
+  .header-controls #display-user {
+    display: none;
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<!-- CORNER MOTIF -->
+
+<svg class="corner-svg corner-top-left"
+     viewBox="0 0 100 100"
+     fill="none"
+     xmlns="http://www.w3.org/2000/svg">
+
+  <path d="M0 0L95 0C85 10 70 12 60 8C50 20 35 25 25 25C25 35 20 50 8 60C12 70 10 85 0 95Z"
+        fill="url(#gold-grad)"
+        opacity=".2"/>
+
+  <path d="M0 0L80 0C70 15 50 15 40 5C30 30 10 30 0 80Z"
+        stroke="url(#gold-grad)"
+        stroke-width="1.5"/>
+
+  <path d="M5 5C25 5 35 15 35 35C15 35 5 25 5 5Z"
+        stroke="url(#gold-grad)"
+        stroke-width="1.2"/>
+
+  <circle cx="16" cy="16" r="5"
+          stroke="url(#gold-grad)"
+          stroke-width="1"/>
+
+  <circle cx="16" cy="16" r="2"
+          fill="url(#gold-grad)"/>
+
+  <circle cx="50" cy="8" r="1.5"
+          fill="url(#gold-grad)"/>
+
+  <circle cx="65" cy="8" r="1.5"
+          fill="url(#gold-grad)"/>
+
+  <circle cx="8" cy="50" r="1.5"
+          fill="url(#gold-grad)"/>
+
+  <circle cx="8" cy="65" r="1.5"
+          fill="url(#gold-grad)"/>
+
+  <path d="M0 90Q25 25 90 0"
+        stroke="url(#gold-grad)"
+        stroke-width="2"/>
+
+  <defs>
+    <linearGradient id="gold-grad"
+                    x1="0%"
+                    y1="0%"
+                    x2="100%"
+                    y2="100%">
+      <stop offset="0%" stop-color="#FFF0BD"/>
+      <stop offset="50%" stop-color="#E2B755"/>
+      <stop offset="100%" stop-color="#9A741C"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<svg class="corner-svg corner-top-right"
+     viewBox="0 0 100 100">
+  <use href="#cornerShape"/>
+</svg>
+
+<svg class="corner-svg corner-bottom-left"
+     viewBox="0 0 100 100">
+  <use href="#cornerShape"/>
+</svg>
+
+<svg class="corner-svg corner-bottom-right"
+     viewBox="0 0 100 100">
+  <use href="#cornerShape"/>
+</svg>
+
+
+<!-- LOGIN -->
+
+<div id="login-page">
+
+  <div class="login-card">
+
+    <h1>Sabhā</h1>
+
+    <p class="subtitle">
+      Royal Executive Assembly
+    </p>
+
+    <div class="divider-line">
+      ❖ 𑁍 ❖
+    </div>
+
+    <form id="login-form">
+
+      <div class="input-group">
+
+        <label>
+          FULL DISPLAY NAME
+        </label>
+
+        <input
+          type="text"
+          id="username"
+          required
+          placeholder="e.g. Vikramaditya">
+
+      </div>
+
+      <div class="input-group">
+
+        <label>
+          SECRET NAME / ALIAS (OPTIONAL)
+        </label>
+
+        <input
+          type="text"
+          id="secret-name"
+          placeholder="e.g. Agent-Kaurava">
+
+      </div>
+
+      <div class="input-group">
+
+        <label>
+          MEETING ID / ROOM
+        </label>
+
+        <input
+          type="text"
+          id="room"
+          required
+          placeholder="e.g. Royal-Council-1">
+
+      </div>
+
+      <div class="remember-container">
+
+        <label>
+          <input
+            type="checkbox"
+            id="remember-me">
+
+          Remember Credentials
+        </label>
+
+      </div>
+
+      <button
+        type="submit"
+        class="btn-gold">
+
+        Enter Assembly
+
+      </button>
+
+    </form>
+
+  </div>
+
+</div>
+
+
+<!-- APP -->
+
+<div id="app-container">
+
+  <header>
+
+    <div class="header-left">
+
+      <div class="header-title">
+        SABHĀ
+      </div>
+
+      <div class="room-badge">
+
+        <i class="fa-solid fa-key"></i>
+
+        Room:
+
+        <span id="current-room-id">
+          --
+        </span>
+
+      </div>
+
+    </div>
+
+    <div class="header-controls">
+
+      <span
+        id="display-user"
+        style="
+          color:var(--gold-light);
+          font-size:.9rem;
+        ">
+        Welcome
+      </span>
+
+      <button
+        class="icon-btn"
+        onclick="toggleSidebar()">
+
+        <i class="fa-solid fa-bars-staggered"></i>
+
+        Toggle Panel
+
+      </button>
+
+      <button
+        class="icon-btn"
+        id="invite-btn"
+        onclick="copySabhaMeetingLink()">
+
+        <i class="fa-solid fa-user-plus"></i>
+
+        Invite People
+
+      </button>
+
+      <button
+        class="icon-btn"
+        onclick="logout()">
+
+        <i class="fa-solid fa-power-off"></i>
+
+        Exit
+
+      </button>
+
+    </div>
+
+  </header>
+
+
+  <!-- VIDEO -->
+
+  <main>
+
+    <div id="jaas-container"></div>
+
+  </main>
+
+
+  <!-- SIDEBAR -->
+
+  <aside
+    class="sidebar"
+    id="sidebar">
+
+    <div class="panel-tabs">
+
+      <button
+        class="tab-btn active"
+        onclick="switchTab('captions')">
+
+        <i class="fa-solid fa-closed-captioning"></i>
+
+        Live Captions
+
+      </button>
+
+      <button
+        class="tab-btn"
+        onclick="switchTab('ai')">
+
+        <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+        AI Assistant
+
+      </button>
+
+      <button
+        class="tab-btn"
+        onclick="switchTab('wb-public')">
+
+        <i class="fa-solid fa-chalkboard"></i>
+
+        Public WB
+
+      </button>
+
+      <button
+        class="tab-btn"
+        onclick="switchTab('wb-private')">
+
+        <i class="fa-solid fa-user-pen"></i>
+
+        Private WB
+
+      </button>
+
+      <button
+        class="tab-btn"
+        onclick="switchTab('notes')">
+
+        <i class="fa-solid fa-note-sticky"></i>
+
+        Notes
+
+      </button>
+
+      <button
+        class="tab-btn"
+        onclick="switchTab('calculator')">
+
+        <i class="fa-solid fa-calculator"></i>
+
+        Calculator
+
+      </button>
+
+    </div>
+
+
+    <!-- CAPTIONS -->
+
+    <div
+      id="captions-panel"
+      class="panel-content active">
+
+      <div class="panel-title">
+        Live Captions & Speaker Identification
+      </div>
+
+      <div class="speaker-config-box">
+
+        <div>
+
+          <span>Your Speaker:</span>
+
+          <input
+            type="text"
+            id="spk1-name"
+            value="Speaker 1"
+            onchange="validateAndSetSpeakers()">
+
+        </div>
+
+        <div>
+
+          <span>Detected Speaker:</span>
+
+          <input
+            type="text"
+            id="spk2-name"
+            value="Other Speaker"
+            onchange="validateAndSetSpeakers()">
+
+        </div>
+
+        <div style="
+          font-size:.68rem;
+          color:#999;
+          line-height:1.35;
+        ">
+
+          Speaker labels use public meeting
+          participant names.
+
+          Secret names are never used
+          as speaker labels.
+
+        </div>
+
+      </div>
+
+      <div id="caption-box">
+
+        <div id="caption-log">
+          Click "Start Captions" and speak...
+        </div>
+
+        <span
+          id="caption-interim"
+          class="interim-text">
+        </span>
+
+      </div>
+
+      <div class="caption-actions">
+
+        <button
+          class="icon-btn"
+          id="start-cap-btn"
+          onclick="toggleCaptions()">
+
+          Start Captions
+
+        </button>
+
+        <button
+          class="icon-btn"
+          onclick="toggleActiveSpeaker()">
+
+          Active:
+          <span id="current-spk-label">
+            Speaker 1
+          </span>
+
+          (Tab/Alt)
+
+        </button>
+
+      </div>
+
+      <div class="caption-actions">
+
+        <button
+          class="icon-btn"
+          onclick="exportVTT()">
+
+          <i class="fa-solid fa-download"></i>
+          Export VTT
+
+        </button>
+
+        <button
+          class="icon-btn"
+          onclick="clearCaptions()">
+
+          <i class="fa-solid fa-trash"></i>
+          Clear
+
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- AI -->
+
+    <div
+      id="ai-panel"
+      class="panel-content">
+
+      <div class="panel-title">
+        AI Knowledge Assistant
+      </div>
+
+      <div
+        class="ai-box"
+        id="ai-box">
+
+        <div class="msg system">
+
+          Ask a question or generate
+          an AI image.
+
+        </div>
+
+      </div>
+
+      <div class="input-row">
+
+        <select id="ai-engine">
+
+          <option value="pollinations">
+            Generative Mode
+          </option>
+
+          <option value="wikipedia">
+            Knowledge Search
+          </option>
+
+        </select>
+
+        <input
+          type="text"
+          id="ai-input"
+          style="flex:1"
+          placeholder="Ask query...">
+
+        <button onclick="fetchAI()">
+
+          <i class="fa-solid fa-bolt"></i>
+
+        </button>
+
+      </div>
+
+      <button
+        class="icon-btn"
+        style="margin-top:8px"
+        onclick="generateAIImage()">
+
+        <i class="fa-solid fa-image"></i>
+
+        Generate AI Image
+
+      </button>
+
+    </div>
+
+
+    <!-- PUBLIC WHITEBOARD -->
+
+    <div
+      id="wb-public-panel"
+      class="panel-content">
+
+      <div class="panel-title">
+        Public Shared Whiteboard
+      </div>
+
+      <div class="wb-controls">
+
+        <input
+          type="color"
+          id="pub-color"
+          value="#E2B755">
+
+        <label>
+
+          Brush
+
+          <input
+            type="range"
+            id="pub-canvas-size"
+            min="1"
+            max="40"
+            value="3">
+
+        </label>
+
+        <label>
+
+          Eraser
+
+          <input
+            type="range"
+            id="pub-canvas-eraser-size"
+            min="5"
+            max="60"
+            value="18">
+
+        </label>
+
+        <button
+          class="icon-btn wb-tool-btn active"
+          id="pub-canvas-brush"
+          onclick="setWBTool('pub-canvas','brush')">
+
+          <i class="fa-solid fa-pen"></i>
+          Brush
+
+        </button>
+
+        <button
+          class="icon-btn wb-tool-btn"
+          id="pub-canvas-eraser"
+          onclick="setWBTool('pub-canvas','eraser')">
+
+          <i class="fa-solid fa-eraser"></i>
+          Eraser
+
+        </button>
+
+        <button
+          class="icon-btn"
+          onclick="addWBText('pub-canvas')">
+
+          <i class="fa-solid fa-font"></i>
+          Text
+
+        </button>
+
+        <label
+          class="icon-btn"
+          style="
+            display:inline-flex;
+            align-items:center;
+            gap:5px;
+          ">
+
+          <i class="fa-solid fa-image"></i>
+
+          Add Image
+
+          <input
+            type="file"
+            accept="image/*"
+            hidden
+            onchange="addWBImage('pub-canvas',this.files[0])">
+
+        </label>
+
+        <button
+          class="icon-btn"
+          onclick="clearWB('pub-canvas')">
+
+          Clear
+
+        </button>
+
+        <button
+          class="icon-btn"
+          onclick="downloadWB(
+            'pub-canvas',
+            'public-whiteboard.png'
+          )">
+
+          Save
+
+        </button>
+
+      </div>
+
+      <canvas
+        id="pub-canvas"
+        class="whiteboard"
+        width="680"
+        height="320">
+      </canvas>
+
+    </div>
+
+
+    <!-- PRIVATE WHITEBOARD -->
+
+    <div
+      id="wb-private-panel"
+      class="panel-content">
+
+      <div class="panel-title">
+        Personal Scratchpad Whiteboard
+      </div>
+
+      <div class="wb-controls">
+
+        <input
+          type="color"
+          id="priv-color"
+          value="#00ffff">
+
+        <label>
+
+          Brush
+
+          <input
+            type="range"
+            id="priv-canvas-size"
+            min="1"
+            max="40"
+            value="3">
+
+        </label>
+
+        <label>
+
+          Eraser
+
+          <input
+            type="range"
+            id="priv-canvas-eraser-size"
+            min="5"
+            max="60"
+            value="18">
+
+        </label>
+
+        <button
+          class="icon-btn wb-tool-btn active"
+          id="priv-canvas-brush"
+          onclick="setWBTool('priv-canvas','brush')">
+
+          <i class="fa-solid fa-pen"></i>
+          Brush
+
+        </button>
+
+        <button
+          class="icon-btn wb-tool-btn"
+          id="priv-canvas-eraser"
+          onclick="setWBTool('priv-canvas','eraser')">
+
+          <i class="fa-solid fa-eraser"></i>
+          Eraser
+
+        </button>
+
+        <button
+          class="icon-btn"
+          onclick="addWBText('priv-canvas')">
+
+          <i class="fa-solid fa-font"></i>
+          Text
+
+        </button>
+
+        <label
+          class="icon-btn"
+          style="
+            display:inline-flex;
+            align-items:center;
+            gap:5px;
+          ">
+
+          <i class="fa-solid fa-image"></i>
+
+          Add Image
+
+          <input
+            type="file"
+            accept="image/*"
+            hidden
+            onchange="addWBImage('priv-canvas',this.files[0])">
+
+        </label>
+
+        <button
+          class="icon-btn"
+          onclick="clearWB('priv-canvas')">
+
+          Clear
+
+        </button>
+
+        <button
+          class="icon-btn"
+          onclick="downloadWB(
+            'priv-canvas',
+            'personal-whiteboard.png'
+          )">
+
+          Save
+
+        </button>
+
+      </div>
+
+      <canvas
+        id="priv-canvas"
+        class="whiteboard"
+        width="680"
+        height="320">
+      </canvas>
+
+    </div>
+
+
+    <!-- NOTES -->
+
+    <div
+      id="notes-panel"
+      class="panel-content">
+
+      <div class="panel-title">
+        Private Minutes & Notes
+      </div>
+
+      <textarea
+        class="notes-area"
+        id="notes-area"
+        placeholder="Take key meeting notes here... (Auto-saved)">
+      </textarea>
+
+    </div>
+
+
+    <!-- CALCULATOR -->
+
+    <div
+      id="calculator-panel"
+      class="panel-content">
+
+      <div class="panel-title">
+        Meeting Calculator
+      </div>
+
+      <div
+        id="calculator-admin"
+        style="
+          display:none;
+          margin-bottom:10px;
+        ">
+
+        <div class="speaker-config-box">
+
+          <div>
+
+            <span>
+              Calculator Access
+            </span>
+
+            <button
+              class="icon-btn"
+              id="calculator-access-btn"
+              onclick="toggleCalculatorAccess()">
+
+              Allow Calculator
+
+            </button>
+
+          </div>
+
+          <div
+            style="
+              font-size:.68rem;
+              color:#999;
+            ">
+
+            Only Naimish with the correct
+            secret name can allow or block
+            calculator access.
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div
+        id="calculator-blocked"
+        class="msg system"
+        style="display:none">
+
+        Calculator is currently blocked
+        by the meeting administrator.
+
+      </div>
+
+      <div
+        id="calculator-ui"
+        class="calculator">
+
+        <input
+          id="calc-display"
+          class="calc-display"
+          type="text"
+          value=""
+          placeholder="0"
+          readonly>
+
+        <div class="calc-grid">
+
+          <button onclick="calcClear()">AC</button>
+          <button onclick="calcBackspace()">⌫</button>
+          <button onclick="calcInput('(')">(</button>
+          <button onclick="calcInput(')')">)</button>
+
+          <button onclick="calcInput('7')">7</button>
+          <button onclick="calcInput('8')">8</button>
+          <button onclick="calcInput('9')">9</button>
+          <button onclick="calcInput('/')">÷</button>
+
+          <button onclick="calcInput('4')">4</button>
+          <button onclick="calcInput('5')">5</button>
+          <button onclick="calcInput('6')">6</button>
+          <button onclick="calcInput('*')">×</button>
+
+          <button onclick="calcInput('1')">1</button>
+          <button onclick="calcInput('2')">2</button>
+          <button onclick="calcInput('3')">3</button>
+          <button onclick="calcInput('-')">−</button>
+
+          <button onclick="calcInput('0')">0</button>
+          <button onclick="calcInput('.')">.</button>
+
+          <button
+            class="calc-equals"
+            onclick="calcEquals()">
+            =
+          </button>
+
+          <button onclick="calcInput('+')">+</button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </aside>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   SABHĀ CORE
+========================================================= */
+
+let apiInstance = null;
+
+let calculatorAllowed = false;
+let isMeetingAdmin = false;
+
+const ADMIN_NAME = "Naimish";
+const ADMIN_SECRET = "you123";
+
+let speaker1Name = "Speaker 1";
+let speaker2Name = "Other Speaker";
+
+let currentSpeakerIndex = 1;
+
+let recognition = null;
+let isCapturing = false;
+
+let startTime = null;
+
+let vttData = [];
+
+
+/* =========================================================
+   PAGE START
+========================================================= */
+
+window.addEventListener("DOMContentLoaded", () => {
+
+  const savedUser =
+    localStorage.getItem("sabha_user");
+
+  const savedSecret =
+    localStorage.getItem("sabha_secret");
+
+  const savedRoom =
+    localStorage.getItem("sabha_room");
+
+  /*
+     THIS IS THE IMPORTANT PART.
+
+     If the URL is:
+
+     https://yourwebsite.com/sabha/?room=Royal-Council-1
+
+     the room is automatically loaded.
+  */
+
+  const params =
+    new URLSearchParams(window.location.search);
+
+  const roomFromLink =
+    params.get("room");
+
+  if (roomFromLink &&
+      roomFromLink.trim()) {
+
+    document.getElementById("room").value =
+      roomFromLink.trim();
+  }
+
+  if (savedUser) {
+
+    document.getElementById("username").value =
+      savedUser;
+
+    document.getElementById("remember-me").checked =
+      true;
+  }
+
+  if (savedSecret) {
+
+    document.getElementById("secret-name").value =
+      savedSecret;
+  }
+
+  if (savedRoom && !roomFromLink) {
+
+    document.getElementById("room").value =
+      savedRoom;
+  }
+
+  initWhiteboard(
+    "pub-canvas",
+    "pub-color"
+  );
+
+  initWhiteboard(
+    "priv-canvas",
+    "priv-color"
+  );
+
+  const savedNotes =
+    localStorage.getItem("sabha_notes");
+
+  if (savedNotes) {
+
+    document.getElementById("notes-area").value =
+      savedNotes;
+  }
+
+  initSpeechRecognition();
+
+  updateCalculatorAccessUI();
+
+});
+
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+document
+.getElementById("login-form")
+.addEventListener("submit", e => {
+
+  e.preventDefault();
+
+  const username =
+    document
+      .getElementById("username")
+      .value
+      .trim();
+
+  const secretName =
+    document
+      .getElementById("secret-name")
+      .value
+      .trim();
+
+  const room =
+    document
+      .getElementById("room")
+      .value
+      .trim();
+
+  const remember =
+    document
+      .getElementById("remember-me")
+      .checked;
+
+
+  if (!username) {
+
+    alert("Please enter a display name.");
+
+    return;
+  }
+
+
+  if (!room) {
+
+    alert("Please enter a meeting room.");
+
+    return;
+  }
+
+
+  if (
+    secretName &&
+    secretName.toLowerCase() ===
+    username.toLowerCase()
+  ) {
+
+    alert(
+      "Display Name and Secret Name cannot be identical."
+    );
+
+    return;
+  }
+
+
+  /*
+     Prevent two users from accidentally
+     exposing their secret name as display name.
+  */
+
+  if (remember) {
+
+    localStorage.setItem(
+      "sabha_user",
+      username
+    );
+
+    localStorage.setItem(
+      "sabha_secret",
+      secretName
+    );
+
+    localStorage.setItem(
+      "sabha_room",
+      room
+    );
+
+  } else {
+
+    localStorage.removeItem("sabha_user");
+    localStorage.removeItem("sabha_secret");
+    localStorage.removeItem("sabha_room");
+
+  }
+
+
+  speaker1Name = username;
+
+  speaker2Name = "Other Speaker";
+
+  document.getElementById("spk1-name").value =
+    username;
+
+  document.getElementById("spk2-name").value =
+    "Other Speaker";
+
+
+  isMeetingAdmin =
+    username.toLowerCase() ===
+    ADMIN_NAME.toLowerCase() &&
+    secretName === ADMIN_SECRET;
+
+
+  /*
+     Admin starts with calculator allowed.
+  */
+
+  calculatorAllowed =
+    isMeetingAdmin;
+
+
+  updateCalculatorAccessUI();
+
+
+  document.getElementById("display-user")
+    .innerText = username;
+
+  document.getElementById("current-room-id")
+    .innerText = room;
+
+
+  document.getElementById("login-page")
+    .style.display = "none";
+
+  document.getElementById("app-container")
+    .style.display = "grid";
+
+
+  initJitsi(
+    username,
+    room
+  );
+
+});
+
+
+/* =========================================================
+   JITSI / 8x8
+========================================================= */
+
+function initJitsi(
+  displayName,
+  roomName
+) {
+
+  const domain = "8x8.vc";
+
+  const options = {
+
+    roomName:
+      `vpaas-magic-cookie-df8532c5bfbd47ecb229c40f03ba8ed2/${roomName}`,
+
+    parentNode:
+      document.querySelector("#jaas-container"),
+
+    userInfo: {
+      displayName:
+        displayName
+    }
+
+  };
+
+
+  apiInstance =
+    new JitsiMeetExternalAPI(
+      domain,
+      options
+    );
+
+
+  apiInstance.addEventListener(
+    "participantJoined",
+    handleParticipantJoined
+  );
+
+
+  apiInstance.addEventListener(
+    "participantLeft",
+    syncJitsiSpeakers
+  );
+
+
+  apiInstance.addEventListener(
+    "dominantSpeakerChanged",
+    handleDominantSpeakerChanged
+  );
+
+
+  setTimeout(
+    syncJitsiSpeakers,
+    1500
+  );
+
+
+  setTimeout(
+    checkDuplicateParticipantNames,
+    2500
+  );
+
+}
+
+
+/* =========================================================
+   REAL INVITATION LINK
+========================================================= */
+
+async function copySabhaMeetingLink() {
+
+  const room =
+    document
+      .getElementById("current-room-id")
+      .innerText
+      .trim();
+
+
+  if (
+    !room ||
+    room === "--"
+  ) {
+
+    alert(
+      "Please enter or join a meeting room first."
+    );
+
+    return;
+  }
+
+
+  /*
+     IMPORTANT:
+
+     A file:// address cannot be shared.
+
+     When Sabhā is hosted at:
+
+     https://example.com/sabha/
+
+     this function generates:
+
+     https://example.com/sabha/?room=ROOM
+
+  */
+
+  if (
+    window.location.protocol ===
+    "file:"
+  ) {
+
+    alert(
+      "Sabhā is currently running as a local HTML file.\n\n" +
+
+      "To generate a real invitation link, " +
+      "upload/host this HTML file on a web server first.\n\n" +
+
+      "After hosting it, the Invite People button " +
+      "will automatically generate the public URL."
+    );
+
+    return;
+  }
+
+
+  /*
+     Use the actual public website address.
+
+     This avoids creating file:/// links.
+  */
+
+  const inviteURL =
+    new URL(
+      window.location.origin +
+      window.location.pathname
+    );
+
+
+  inviteURL.search = "";
+  inviteURL.hash = "";
+
+
+  inviteURL.searchParams.set(
+    "room",
+    room
+  );
+
+
+  const link =
+    inviteURL.toString();
+
+
+  const button =
+    document.getElementById(
+      "invite-btn"
+    );
+
+
+  try {
+
+    await navigator.clipboard.writeText(
+      link
+    );
+
+
+    if (button) {
+
+      const original =
+        button.innerHTML;
+
+      button.innerHTML =
+        '<i class="fa-solid fa-check"></i> Link Copied';
+
+      setTimeout(() => {
+
+        button.innerHTML =
+          original;
+
+      }, 1800);
+
+    }
+
+  } catch (error) {
+
+    const temp =
+      document.createElement(
+        "textarea"
+      );
+
+    temp.value =
+      link;
+
+    temp.style.position =
+      "fixed";
+
+    temp.style.opacity =
+      "0";
+
+    document.body.appendChild(
+      temp
+    );
+
+    temp.focus();
+
+    temp.select();
+
+    try {
+
+      document.execCommand(
+        "copy"
+      );
+
+    } catch (e) {}
+
+    temp.remove();
+
+
+    alert(
+      "Sabhā Meeting Link:\n\n" +
+      link
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   PARTICIPANTS
+========================================================= */
+
+function normalizeSpeakerName(name) {
+
+  return String(name || "")
+    .trim()
+    .replace(/\s+/g, " ")
+    .toLowerCase();
+
+}
+
+
+function getMeetingParticipants() {
+
+  if (
+    !apiInstance ||
+    !apiInstance.getParticipantsInfo
+  ) {
+
+    return [];
+  }
+
+  try {
+
+    return (
+      apiInstance
+        .getParticipantsInfo() || []
+    );
+
+  } catch (e) {
+
+    return [];
+  }
+
+}
+
+
+function handleParticipantJoined(event) {
+
+  syncJitsiSpeakers();
+
+  checkDuplicateParticipantNames(
+    event
+  );
+
+}
+
+
+function checkDuplicateParticipantNames() {
+
+  if (!apiInstance) return;
+
+
+  const localName =
+    document
+      .getElementById("spk1-name")
+      .value
+      .trim();
+
+
+  const participants =
+    getMeetingParticipants();
+
+
+  const seen =
+    new Map();
+
+
+  const all = [
+
+    {
+      participantId: "local",
+
+      displayName:
+        localName
+    },
+
+    ...participants
+
+  ];
+
+
+  all.forEach(person => {
+
+    const name =
+      String(
+        person.displayName || ""
+      ).trim();
+
+
+    const key =
+      normalizeSpeakerName(
+        name
+      );
+
+
+    if (!key) return;
+
+
+    if (!seen.has(key)) {
+
+      seen.set(
+        key,
+        []
+      );
+
+    }
+
+
+    seen.get(key).push(
+      person
+    );
+
+  });
+
+
+  seen.forEach(
+    (people, key) => {
+
+      if (
+        people.length < 2
+      ) return;
+
+
+      /*
+         If Jitsi permits the command,
+         remove duplicate participants.
+      */
+
+      people
+        .slice(1)
+        .forEach(person => {
+
+          if (
+            person.participantId &&
+            person.participantId !== "local"
+          ) {
+
+            try {
+
+              apiInstance.executeCommand(
+                "kickParticipant",
+                person.participantId
+              );
+
+            } catch (e) {
+
+              showDuplicateNameWarning(
+                person.displayName
+              );
+
+            }
+
+          }
+
+        });
+
+    }
+  );
+
+}
+
+
+function showDuplicateNameWarning(
+  name
+) {
+
+  alert(
+    `Join blocked: the name "${name}" is already being used in this meeting. Please leave and join with a different display name.`
+  );
+
+}
+
+
+function syncJitsiSpeakers() {
+
+  if (
+    !apiInstance ||
+    !apiInstance.getParticipantsInfo
+  ) return;
+
+
+  try {
+
+    const me =
+      document
+        .getElementById("spk1-name")
+        .value
+        .trim();
+
+
+    const participants =
+      apiInstance
+        .getParticipantsInfo() || [];
+
+
+    const other =
+      participants.find(
+        p =>
+          p &&
+          p.displayName &&
+          p.displayName.trim() !== me
+      );
+
+
+    if (other) {
+
+      speaker2Name =
+        other.displayName.trim();
+
+      document.getElementById(
+        "spk2-name"
+      ).value =
+        speaker2Name;
+
+      updateSpeakerLabel();
+
+    }
+
+  } catch (e) {}
+
+}
+
+
+function handleDominantSpeakerChanged(
+  event
+) {
+
+  const id =
+    event &&
+    (
+      event.id ||
+      event.participantId
+    );
+
+
+  if (
+    !id ||
+    !apiInstance
+  ) return;
+
+
+  try {
+
+    const participants =
+      apiInstance
+        .getParticipantsInfo() || [];
+
+
+    const p =
+      participants.find(
+        x =>
+          x &&
+          x.participantId === id
+      );
+
+
+    const me =
+      document
+        .getElementById("spk1-name")
+        .value
+        .trim();
+
+
+    if (
+      p &&
+      p.displayName &&
+      p.displayName.trim() !== me
+    ) {
+
+      speaker2Name =
+        p.displayName.trim();
+
+      document.getElementById(
+        "spk2-name"
+      ).value =
+        speaker2Name;
+
+      currentSpeakerIndex = 2;
+
+    } else {
+
+      currentSpeakerIndex = 1;
+
+    }
+
+
+    updateSpeakerLabel();
+
+  } catch (e) {}
+
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+function toggleSidebar() {
+
+  document
+    .getElementById(
+      "app-container"
+    )
+    .classList.toggle(
+      "sidebar-hidden"
+    );
+
+}
+
+
+function switchTab(tabName) {
+
+  document
+    .querySelectorAll(".tab-btn")
+    .forEach(btn =>
+      btn.classList.remove(
+        "active"
+      )
+    );
+
+
+  document
+    .querySelectorAll(".panel-content")
+    .forEach(panel =>
+      panel.classList.remove(
+        "active"
+      )
+    );
+
+
+  const target =
+    document.getElementById(
+      `${tabName}-panel`
+    );
+
+
+  if (target) {
+
+    target.classList.add(
+      "active"
+    );
+
+  }
+
+
+  document
+    .querySelectorAll(".tab-btn")
+    .forEach(btn => {
+
+      const onclick =
+        btn.getAttribute(
+          "onclick"
+        ) || "";
+
+
+      if (
+        onclick.includes(
+          `switchTab('${tabName}')`
+        )
+      ) {
+
+        btn.classList.add(
+          "active"
+        );
+
+      }
+
+    });
+
+}
+
+
+/* =========================================================
+   SPEAKER LABELS
+========================================================= */
+
+function validateAndSetSpeakers() {
+
+  const s1 =
+    document
+      .getElementById("spk1-name")
+      .value
+      .trim();
+
+
+  const s2 =
+    document
+      .getElementById("spk2-name")
+      .value
+      .trim();
+
+
+  if (!s1) {
+
+    alert(
+      "Your speaker name cannot be empty."
+    );
+
+    document.getElementById(
+      "spk1-name"
+    ).value =
+      speaker1Name;
+
+    return;
+  }
+
+
+  speaker1Name =
+    s1;
+
+  speaker2Name =
+    s2 ||
+    "Other Speaker";
+
+
+  document.getElementById(
+    "spk2-name"
+  ).value =
+    speaker2Name;
+
+
+  updateSpeakerLabel();
+
+}
+
+
+function updateSpeakerLabel() {
+
+  const label =
+    currentSpeakerIndex === 1
+      ? speaker1Name
+      : speaker2Name;
+
+
+  document.getElementById(
+    "current-spk-label"
+  ).innerText =
+    label;
+
+}
+
+
+function toggleActiveSpeaker() {
+
+  currentSpeakerIndex =
+    currentSpeakerIndex === 1
+      ? 2
+      : 1;
+
+
+  updateSpeakerLabel();
+
+}
+
+
+window.addEventListener(
+  "keydown",
+  e => {
+
+    if (
+      e.key === "Tab" ||
+      e.key === "Alt"
+    ) {
+
+      if (
+        document
+          .getElementById(
+            "captions-panel"
+          )
+          .classList.contains(
+            "active"
+          )
+      ) {
+
+        e.preventDefault();
+
+        toggleActiveSpeaker();
+
+      }
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   SPEECH RECOGNITION
+========================================================= */
+
+function formatVTTTime(ms) {
+
+  const hrs =
+    String(
+      Math.floor(
+        ms / 3600000
+      )
+    ).padStart(
+      2,
+      "0"
+    );
+
+
+  const mins =
+    String(
+      Math.floor(
+        (ms % 3600000) /
+        60000
+      )
+    ).padStart(
+      2,
+      "0"
+    );
+
+
+  const secs =
+    String(
+      Math.floor(
+        (ms % 60000) /
+        1000
+      )
+    ).padStart(
+      2,
+      "0"
+    );
+
+
+  const millis =
+    String(
+      ms % 1000
+    ).padStart(
+      3,
+      "0"
+    );
+
+
+  return `${hrs}:${mins}:${secs}.${millis}`;
+
+}
+
+
+function initSpeechRecognition() {
+
+  const SpeechRecognition =
+    window.SpeechRecognition ||
+    window.webkitSpeechRecognition;
+
+
+  if (!SpeechRecognition) {
+
+    document.getElementById(
+      "caption-log"
+    ).innerText =
+      "Web Speech API not supported. Use Chrome or Edge.";
+
+    return;
+  }
+
+
+  recognition =
+    new SpeechRecognition();
+
+
+  recognition.continuous =
+    true;
+
+  recognition.interimResults =
+    true;
+
+  recognition.lang =
+    "en-US";
+
+
+  recognition.onstart =
+    () => {
+
+      isCapturing =
+        true;
+
+      startTime =
+        startTime ||
+        Date.now();
+
+
+      document.getElementById(
+        "start-cap-btn"
+      ).innerText =
+        "Stop Captions";
+
+
+      if (
+        document
+          .getElementById(
+            "caption-log"
+          )
+          .innerText
+          .includes(
+            'Click "Start Captions"'
+          )
+      ) {
+
+        document.getElementById(
+          "caption-log"
+        ).innerText =
+          "";
+
+      }
+
+    };
+
+
+  recognition.onend =
+    () => {
+
+      if (isCapturing) {
+
+        setTimeout(
+          () => {
+
+            if (!isCapturing) return;
+
+            try {
+
+              recognition.start();
+
+            } catch (e) {}
+
+          },
+          250
+        );
+
+        return;
+
+      }
+
+
+      document.getElementById(
+        "start-cap-btn"
+      ).innerText =
+        "Start Captions";
+
+
+      document.getElementById(
+        "caption-interim"
+      ).innerText =
+        "";
+
+    };
+
+
+  recognition.onresult =
+    event => {
+
+      let finalTranscript =
+        "";
+
+      let interimTranscript =
+        "";
+
+
+      const elapsed =
+        Date.now() -
+        startTime;
+
+
+      for (
+        let i =
+          event.resultIndex;
+        i <
+          event.results.length;
+        i++
+      ) {
+
+        if (
+          event.results[i]
+            .isFinal
+        ) {
+
+          finalTranscript +=
+            event.results[i][0]
+              .transcript;
+
+        } else {
+
+          interimTranscript +=
+            event.results[i][0]
+              .transcript;
+
+        }
+
+      }
+
+
+      if (
+        finalTranscript.trim()
+          .length > 0
+      ) {
+
+        const text =
+          finalTranscript.trim();
+
+
+        const activeName =
+          currentSpeakerIndex === 1
+            ? speaker1Name
+            : speaker2Name;
+
+
+        const spkClass =
+          currentSpeakerIndex === 1
+            ? "spk-1"
+            : "spk-2";
+
+
+        const line =
+          document.createElement(
+            "div"
+          );
+
+
+        line.className =
+          "caption-line";
+
+
+        const speaker =
+          document.createElement(
+            "span"
+          );
+
+
+        speaker.className =
+          `speaker-tag ${spkClass}`;
+
+
+        speaker.innerText =
+          `<${activeName}>`;
+
+
+        line.appendChild(
+          speaker
+        );
+
+
+        line.appendChild(
+          document.createTextNode(
+            " " + text
+          )
+        );
+
+
+        document.getElementById(
+          "caption-log"
+        ).appendChild(
+          line
+        );
+
+
+        vttData.push({
+
+          start:
+            formatVTTTime(
+              Math.max(
+                0,
+                elapsed - 3000
+              )
+            ),
+
+          end:
+            formatVTTTime(
+              elapsed
+            ),
+
+          text:
+            `<v ${activeName}>${text}</v>`
+
+        });
+
+
+        const box =
+          document.getElementById(
+            "caption-box"
+          );
+
+
+        box.scrollTop =
+          box.scrollHeight;
+
+      }
+
+
+      const activeName =
+        currentSpeakerIndex === 1
+          ? speaker1Name
+          : speaker2Name;
+
+
+      document.getElementById(
+        "caption-interim"
+      ).innerText =
+        interimTranscript
+          ? `<${activeName}> ${interimTranscript}`
+          : "";
+
+    };
+
+}
+
+
+function toggleCaptions() {
+
+  if (!recognition) return;
+
+
+  if (isCapturing) {
+
+    isCapturing =
+      false;
+
+    recognition.stop();
+
+  } else {
+
+    isCapturing =
+      true;
+
+    try {
+
+      recognition.start();
+
+    } catch (e) {}
+
+  }
+
+}
+
+
+function clearCaptions() {
+
+  document.getElementById(
+    "caption-log"
+  ).innerHTML =
+    "";
+
+  document.getElementById(
+    "caption-interim"
+  ).innerText =
+    "";
+
+  vttData =
+    [];
+
+  startTime =
+    null;
+
+}
+
+
+function exportVTT() {
+
+  if (
+    vttData.length === 0
+  ) {
+
+    alert(
+      "No caption data available."
+    );
+
+    return;
+  }
+
+
+  let content =
+    "WEBVTT\n\n";
+
+
+  vttData.forEach(
+    item => {
+
+      content +=
+        `${item.start} --> ${item.end}\n`;
+
+      content +=
+        `${item.text}\n\n`;
+
+    }
+  );
+
+
+  const blob =
+    new Blob(
+      [content],
+      {
+        type:
+          "text/vtt"
+      }
+    );
+
+
+  const url =
+    URL.createObjectURL(
+      blob
+    );
+
+
+  const a =
+    document.createElement(
+      "a"
+    );
+
+
+  a.href =
+    url;
+
+  a.download =
+    `sabha-transcript-${Date.now()}.vtt`;
+
+
+  a.click();
+
+
+  URL.revokeObjectURL(
+    url
+  );
+
+}
+
+
+/* =========================================================
+   AI
+========================================================= */
+
+async function fetchAI() {
+
+  const input =
+    document.getElementById(
+      "ai-input"
+    );
+
+
+  const engine =
+    document.getElementById(
+      "ai-engine"
+    ).value;
+
+
+  const query =
+    input.value.trim();
+
+
+  if (!query) return;
+
+
+  const aiBox =
+    document.getElementById(
+      "ai-box"
+    );
+
+
+  const userMsg =
+    document.createElement(
+      "div"
+    );
+
+
+  userMsg.className =
+    "msg user";
+
+
+  userMsg.innerText =
+    query;
+
+
+  aiBox.appendChild(
+    userMsg
+  );
+
+
+  input.value =
+    "";
+
+
+  const loading =
+    document.createElement(
+      "div"
+    );
+
+
+  loading.className =
+    "msg system";
+
+
+  loading.innerText =
+    "Consulting knowledge base...";
+
+
+  aiBox.appendChild(
+    loading
+  );
+
+
+  try {
+
+    let answerText =
+      "";
+
+
+    if (
+      engine ===
+      "pollinations"
+    ) {
+
+      const res =
+        await fetch(
+          `https://text.pollinations.ai/${encodeURIComponent(query)}`
+        );
+
+
+      answerText =
+        await res.text();
+
+    }
+
+
+    if (
+      engine ===
+      "wikipedia"
+    ) {
+
+      const res =
+        await fetch(
+          `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(query)}`
+        );
+
+
+      if (res.ok) {
+
+        const data =
+          await res.json();
+
+
+        answerText =
+          data.extract ||
+          "No entry summary found.";
+
+      } else {
+
+        answerText =
+          "Information entry not found.";
+
+      }
+
+    }
+
+
+    loading.innerText =
+      answerText ||
+      "No response returned.";
+
+  } catch (error) {
+
+    loading.innerText =
+      "Error querying knowledge base.";
+
+  }
+
+
+  aiBox.scrollTop =
+    aiBox.scrollHeight;
+
+}
+
+
+async function generateAIImage() {
+
+  const input =
+    document.getElementById(
+      "ai-input"
+    );
+
+
+  const prompt =
+    input.value.trim();
+
+
+  if (!prompt) {
+
+    alert(
+      "Enter an image prompt first."
+    );
+
+    input.focus();
+
+    return;
+  }
+
+
+  const aiBox =
+    document.getElementById(
+      "ai-box"
+    );
+
+
+  const msg =
+    document.createElement(
+      "div"
+    );
+
+
+  msg.className =
+    "msg user";
+
+
+  msg.innerText =
+    `Generate image: ${prompt}`;
+
+
+  aiBox.appendChild(
+    msg
+  );
+
+
+  const status =
+    document.createElement(
+      "div"
+    );
+
+
+  status.className =
+    "msg system";
+
+
+  status.innerText =
+    "Generating image...";
+
+
+  aiBox.appendChild(
+    status
+  );
+
+
+  try {
+
+    const imageUrl =
+      `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=768&height=768&nologo=true`;
+
+
+    const img =
+      document.createElement(
+        "img"
+      );
+
+
+    img.className =
+      "ai-generated-image";
+
+
+    img.alt =
+      prompt;
+
+
+    img.src =
+      imageUrl;
+
+
+    img.onload =
+      () => {
+
+        status.remove();
+
+        aiBox.appendChild(
+          img
+        );
+
+        aiBox.scrollTop =
+          aiBox.scrollHeight;
+
+      };
+
+
+    img.onerror =
+      () => {
+
+        status.innerText =
+          "Image generation failed. Please try again.";
+
+      };
+
+  } catch (e) {
+
+    status.innerText =
+      "Image generation failed.";
+
+  }
+
+}
+
+
+/* =========================================================
+   CALCULATOR ACCESS
+========================================================= */
+
+function updateCalculatorAccessUI() {
+
+  const adminPanel =
+    document.getElementById(
+      "calculator-admin"
+    );
+
+
+  const blocked =
+    document.getElementById(
+      "calculator-blocked"
+    );
+
+
+  const calcUI =
+    document.getElementById(
+      "calculator-ui"
+    );
+
+
+  const accessBtn =
+    document.getElementById(
+      "calculator-access-btn"
+    );
+
+
+  if (
+    !adminPanel ||
+    !blocked ||
+    !calcUI
+  ) return;
+
+
+  adminPanel.style.display =
+    isMeetingAdmin
+      ? "block"
+      : "none";
+
+
+  blocked.style.display =
+    calculatorAllowed
+      ? "none"
+      : "block";
+
+
+  calcUI.classList.toggle(
+    "calculator-disabled",
+    !calculatorAllowed
+  );
+
+
+  if (accessBtn) {
+
+    accessBtn.innerText =
+      calculatorAllowed
+        ? "Block Calculator"
+        : "Allow Calculator";
+
+  }
+
+}
+
+
+function toggleCalculatorAccess() {
+
+  if (!isMeetingAdmin) {
+
+    alert(
+      "Only Naimish with the correct secret name can allow or block the calculator."
+    );
+
+    return;
+  }
+
+
+  calculatorAllowed =
+    !calculatorAllowed;
+
+
+  updateCalculatorAccessUI();
+
+}
+
+
+/* =========================================================
+   CALCULATOR
+========================================================= */
+
+function calcInput(value) {
+
+  if (!calculatorAllowed)
+    return;
+
+
+  const d =
+    document.getElementById(
+      "calc-display"
+    );
+
+
+  if (
+    d.value ===
+    "Error"
+  ) {
+
+    d.value =
+      "";
+
+  }
+
+
+  d.value +=
+    value;
+
+}
+
+
+function calcClear() {
+
+  if (!calculatorAllowed)
+    return;
+
+
+  document.getElementById(
+    "calc-display"
+  ).value =
+    "";
+
+}
+
+
+function calcBackspace() {
+
+  if (!calculatorAllowed)
+    return;
+
+
+  const d =
+    document.getElementById(
+      "calc-display"
+    );
+
+
+  d.value =
+    d.value.slice(
+      0,
+      -1
+    );
+
+}
+
+
+function calcEquals() {
+
+  if (!calculatorAllowed)
+    return;
+
+
+  const d =
+    document.getElementById(
+      "calc-display"
+    );
+
+
+  const expression =
+    d.value;
+
+
+  if (
+    !/^[0-9+\-*/().\s]+$/
+      .test(expression)
+  ) {
+
+    d.value =
+      "Error";
+
+    return;
+
+  }
+
+
+  try {
+
+    const result =
+      Function(
+        `"use strict"; return (${expression})`
+      )();
+
+
+    if (
+      !Number.isFinite(result)
+    ) {
+
+      throw new Error();
+
+    }
+
+
+    d.value =
+      String(result);
+
+  } catch (e) {
+
+    d.value =
+      "Error";
+
+  }
+
+}
+
+
+document.addEventListener(
+  "keydown",
+  e => {
+
+    const panel =
+      document.getElementById(
+        "calculator-panel"
+      );
+
+
+    if (
+      !panel ||
+      !panel.classList.contains(
+        "active"
+      )
+    ) return;
+
+
+    if (
+      /^[0-9.+\-*/()]$/.test(
+        e.key
+      )
+    ) {
+
+      calcInput(
+        e.key
+      );
+
+      e.preventDefault();
+
+    }
+
+    else if (
+      e.key === "Enter"
+    ) {
+
+      calcEquals();
+
+      e.preventDefault();
+
+    }
+
+    else if (
+      e.key === "Backspace"
+    ) {
+
+      calcBackspace();
+
+      e.preventDefault();
+
+    }
+
+    else if (
+      e.key === "Escape"
+    ) {
+
+      calcClear();
+
+      e.preventDefault();
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   NOTES
+========================================================= */
+
+document
+.getElementById("notes-area")
+.addEventListener(
+  "input",
+  e => {
+
+    localStorage.setItem(
+      "sabha_notes",
+      e.target.value
+    );
+
+  }
+);
+
+
+/* =========================================================
+   WHITEBOARD
+========================================================= */
+
+const wbState = {};
+
+
+function initWhiteboard(
+  canvasId,
+  colorId
+) {
+
+  const canvas =
+    document.getElementById(
+      canvasId
+    );
+
+
+  if (!canvas) return;
+
+
+  const ctx =
+    canvas.getContext(
+      "2d"
+    );
+
+
+  wbState[canvasId] = {
+
+    canvas,
+
+    ctx,
+
+    drawing:
+      false,
+
+    tool:
+      "brush"
+
+  };
+
+
+  ctx.fillStyle =
+    "#1a1a1a";
+
+
+  ctx.fillRect(
+    0,
+    0,
+    canvas.width,
+    canvas.height
+  );
+
+
+  canvas.addEventListener(
+    "pointerdown",
+    e => {
+
+      canvas.setPointerCapture(
+        e.pointerId
+      );
+
+      wbState[canvasId]
+        .drawing =
+        true;
+
+
+      const pos =
+        getCanvasPosition(
+          canvas,
+          e
+        );
+
+
+      ctx.beginPath();
+
+      ctx.moveTo(
+        pos.x,
+        pos.y
+      );
+
+    }
+  );
+
+
+  canvas.addEventListener(
+    "pointermove",
+    e => {
+
+      const state =
+        wbState[canvasId];
+
+
+      if (!state.drawing)
+        return;
+
+
+      const pos =
+        getCanvasPosition(
+          canvas,
+          e
+        );
+
+
+      const color =
+        document.getElementById(
+          colorId
+        ).value;
+
+
+      if (
+        state.tool ===
+        "eraser"
+      ) {
+
+        ctx.globalCompositeOperation =
+          "destination-out";
+
+
+        ctx.lineWidth =
+          Number(
+            document.getElementById(
+              canvasId === "pub-canvas"
+                ? "pub-canvas-eraser-size"
+                : "priv-canvas-eraser-size"
+            ).value
+          );
+
+      } else {
+
+        ctx.globalCompositeOperation =
+          "source-over";
+
+
+        ctx.strokeStyle =
+          color;
+
+
+        ctx.lineWidth =
+          Number(
+            document.getElementById(
+              canvasId === "pub-canvas"
+                ? "pub-canvas-size"
+                : "priv-canvas-size"
+            ).value
+          );
+
+      }
+
+
+      ctx.lineCap =
+        "round";
+
+
+      ctx.lineJoin =
+        "round";
+
+
+      ctx.lineTo(
+        pos.x,
+        pos.y
+      );
+
+
+      ctx.stroke();
+
+
+      ctx.beginPath();
+
+      ctx.moveTo(
+        pos.x,
+        pos.y
+      );
+
+    }
+  );
+
+
+  canvas.addEventListener(
+    "pointerup",
+    () => {
+
+      wbState[canvasId]
+        .drawing =
+        false;
+
+      ctx.beginPath();
+
+    }
+  );
+
+
+  canvas.addEventListener(
+    "pointerleave",
+    () => {
+
+      wbState[canvasId]
+        .drawing =
+        false;
+
+      ctx.beginPath();
+
+    }
+  );
+
+}
+
+
+function getCanvasPosition(
+  canvas,
+  event
+) {
+
+  const rect =
+    canvas.getBoundingClientRect();
+
+
+  return {
+
+    x:
+      (event.clientX -
+        rect.left) *
+      (canvas.width /
+        rect.width),
+
+    y:
+      (event.clientY -
+        rect.top) *
+      (canvas.height /
+        rect.height)
+
+  };
+
+}
+
+
+function setWBTool(
+  canvasId,
+  tool
+) {
+
+  if (!wbState[canvasId])
+    return;
+
+
+  wbState[canvasId]
+    .tool =
+    tool;
+
+
+  document
+    .getElementById(
+      `${canvasId}-brush`
+    )
+    .classList.toggle(
+      "active",
+      tool === "brush"
+    );
+
+
+  document
+    .getElementById(
+      `${canvasId}-eraser`
+    )
+    .classList.toggle(
+      "active",
+      tool === "eraser"
+    );
+
+}
+
+
+function clearWB(
+  canvasId
+) {
+
+  const state =
+    wbState[canvasId];
+
+
+  if (!state) return;
+
+
+  const canvas =
+    state.canvas;
+
+
+  const ctx =
+    state.ctx;
+
+
+  ctx.globalCompositeOperation =
+    "source-over";
+
+
+  ctx.fillStyle =
+    "#1a1a1a";
+
+
+  ctx.fillRect(
+    0,
+    0,
+    canvas.width,
+    canvas.height
+  );
+
+}
+
+
+function addWBText(
+  canvasId
+) {
+
+  const text =
+    prompt(
+      "Enter text:"
+    );
+
+
+  if (!text) return;
+
+
+  const state =
+    wbState[canvasId];
+
+
+  const ctx =
+    state.ctx;
+
+
+  ctx.globalCompositeOperation =
+    "source-over";
+
+
+  ctx.fillStyle =
+    document.getElementById(
+      canvasId === "pub-canvas"
+        ? "pub-color"
+        : "priv-color"
+    ).value;
+
+
+  ctx.font =
+    "24px Cinzel";
+
+
+  ctx.fillText(
+    text,
+    30,
+    50
+  );
+
+}
+
+
+function addWBImage(
+  canvasId,
+  file
+) {
+
+  if (!file) return;
+
+
+  const reader =
+    new FileReader();
+
+
+  reader.onload =
+    e => {
+
+      const img =
+        new Image();
+
+
+      img.onload =
+        () => {
+
+          const state =
+            wbState[canvasId];
+
+
+          const ctx =
+            state.ctx;
+
+
+          const canvas =
+            state.canvas;
+
+
+          ctx.globalCompositeOperation =
+            "source-over";
+
+
+          const scale =
+            Math.min(
+              canvas.width /
+                img.width,
+              canvas.height /
+                img.height,
+              1
+            );
+
+
+          const w =
+            img.width *
+            scale;
+
+
+          const h =
+            img.height *
+            scale;
+
+
+          ctx.drawImage(
+            img,
+            10,
+            10,
+            w,
+            h
+          );
+
+        };
+
+
+      img.src =
+        e.target.result;
+
+    };
+
+
+  reader.readAsDataURL(
+    file
+  );
+
+}
+
+
+function downloadWB(
+  canvasId,
+  filename
+) {
+
+  const canvas =
+    document.getElementById(
+      canvasId
+    );
+
+
+  const link =
+    document.createElement(
+      "a"
+    );
+
+
+  link.download =
+    filename;
+
+
+  link.href =
+    canvas.toDataURL(
+      "image/png"
+    );
+
+
+  link.click();
+
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+function logout() {
+
+  if (apiInstance) {
+
+    try {
+
+      apiInstance.dispose();
+
+    } catch (e) {}
+
+  }
+
+
+  apiInstance =
+    null;
+
+
+  calculatorAllowed =
+    false;
+
+
+  isMeetingAdmin =
+    false;
+
+
+  document.getElementById(
+    "app-container"
+  ).style.display =
+    "none";
+
+
+  document.getElementById(
+    "login-page"
+  ).style.display =
+    "flex";
+
+
+  updateCalculatorAccessUI();
+
+}
+
+</script>
+
+</body>
+</html>
